@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+.poppins {
+    font-family: 'Poppins', sans-serif;
+}
+
+.btnOD {
+    width: 100px;
+    background-color: transparent;
+    color: #BD0707;
+    transition: 0.3s;
+}
+
+.btnOD:hover {
+    background-color: #BD0707;
+    color: white;
+}
+
+.btnD {
+    width: 100px;
+    background-color: #BD0707;
+    color: white;
+    transition: 0.3s;
+}
+
+.btnD:hover {
+    background-color: #ac4949;
+}
+
+.btnNoSize {
+    background-color: #BD0707;
+    color: white;
+    transition: 0.3s;
+}
+
+.btnNoSize:hover {
+    background-color: #ac4949;
+}
+
+.btnLink {
+    color: blue;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+}
+
+.btnLink:hover {
+    color: blue;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+}
+
+.h2Bucks {
+    font-family: 'Poppins', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 49px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #BD0707;
+
+}
+
+.h3Bucks {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 49px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #BD0707;
+
+}
+
+.bucksRed {
+    color: #BD0707;
+}
+
+.bucksRedBg {
+    background:#BD0707;
+}
+
+.subTitle {
+    font-weight: 900;
+}
+
+.bucksBtnRed {
+    background:#BD0707;
+    color: white;
+    border: none;
+}
+
+.bucksBtnRed:hover {
+    background:#BD0707;
+    color: white;
+}
+
+.bucksBtnRed:active {
+    background:#BD0707 !important;
+    color: white;
+}
+
+.jumboContainer {
+    position: relative;
+    margin: 30px auto 20px;
+    width: 1072px;
+    height: 400px;
+}
+
+.jumboRect {
+    width: 958px;
+    height: 400px;
+}
+
+.jumboImg {
+    position: absolute;
+    left: 620px;
+    top: 40px;
+}
+
+.jumboTitle {
+    position: absolute;
+    left: 50px;
+    top: 100px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
+    font-size: 60px;
+    line-height: 65px;
+    color: white;
+}
+
+.jumboSubTitle {
+    color: white;
+    position: absolute;
+    left: 50px;
+    top: 175px;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 33px;
+}
+
+.jumboDescription {
+    position: absolute;
+    width: 469px;
+    height: 125px;
+    left: 50px;
+    top: 230px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
