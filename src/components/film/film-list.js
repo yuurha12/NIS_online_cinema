@@ -39,14 +39,6 @@ const FilmList = () => {
         >
             <Link to={`/product-detail/${item.id}`}>
               <Card.Img variant="top" src={item.image} />
-              <Card.Body>
-                <Card.Title style={{ color: "#BD0707", fontSize: "18px" }}>
-                  <b> {item.title}</b>
-                </Card.Title>
-                <Card.Text style={{ fontSize: "14px" }}>
-                  Rp. {item.price}
-                </Card.Text>
-              </Card.Body>
             </Link>
         </Card>
       ))}

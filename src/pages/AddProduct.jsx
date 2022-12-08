@@ -18,7 +18,10 @@ export default function AddProduct() {
   //Store data product
   const [form, setForm] = useState({
     title: "",
+    category: "",
     price: "",
+    linkfilm:"",
+    description:"",
     image: "",
   }); 
 
@@ -53,7 +56,9 @@ export default function AddProduct() {
 
       const formData = new FormData();
       formData.set("title", form.title);
+      formData.set("category", form.category)
       formData.set("price", form.price);
+      formData.set("linkfilm", form.linkfilm);
       formData.set("image", form.image[0], form.image[0].name);
 
       // Insert category data

@@ -1,43 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-
-span{
+span {
   display: block;
 }
-.wrap{
+.wrap {
   /* border: 1px solid black; */
   display: flex;
   flex-direction: row;
-  margin:40px 50px 0px 50px;
+  margin: 40px 50px 0px 50px;
   column-gap: 100px;
 }
-.left{
-  margin: 0 10px 0 100px ;
+.left {
+  margin: 0 10px 0;
   width: 436px;
   height: 555px;
   border-radius: 5px;
 }
 .left img {
   width: 100%;
-  height: 100%;
   border-radius: 5px;
+  
 }
-.right{
-  margin: 0 20px 20px 20px ;
-}
-.text_top{
+/* .right {
+  margin: 0 20px 20px 20px;
+} */
+.text_top {
   margin-top: 60px;
 }
-.toppings{
-  margin-left:50px;
+.toppings {
+  margin-left: 50px;
   /* border: 1px solid black; */
   display: grid;
-  grid-template-columns: repeat(4,1fr);
+  grid-template-columns: repeat(4, 1fr);
   width: 580px;
   height: 280px;
   overflow: scroll;
 }
-.topping{
+.topping {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,52 +45,48 @@ span{
   width: 141px;
   height: 137px;
   text-align: center;
-
 }
-.toppings::-webkit-scrollbar{
+.toppings::-webkit-scrollbar {
   display: none;
 }
 
-.topping>img{
+.topping > img {
   width: 80px;
   width: 80px;
   border-radius: 50%;
 }
 
-
-.price{
+.price {
   display: flex;
   justify-content: space-between;
 }
 
-.btn_grp{
+.btn_grp {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
-.btn{
+/* .btn {
   width: 97%;
-  background-color:#BD0707 ;
+  background-color: #bd0707;
   border-radius: 5px;
   border: none;
-}
+} */
 
-.price{
+.price {
   margin-top: 30px;
 }
-.check{
+.check {
   position: absolute;
   width: 30px !important;
   margin-top: -50px;
   margin-left: 30px;
 }
 
-.imageTopping{
+.imageTopping {
   border-radius: 50%;
   width: 80px;
   height: 75px;
 }
-
 
 .checkContainer {
   display: block;
@@ -124,48 +119,57 @@ span{
   margin-left: 50px;
 }
 
-
 /* When the checkbox is checked, add a blue background */
 .checkContainer input:checked ~ .checkmark {
   display: block;
 }
 
-
-
 /* font */
-*{
-  font-family: 'Poppins', sans-serif;
+* {
+  font-family: "Poppins", sans-serif;
 }
-.text_top>p{
+.text_top > p {
   font-size: 27px;
   font-weight: 500;
-  color: #974A4A;
+  color: #974a4a;
 }
-.price>p{
-  color:#974A4A;
+.price > p {
+  color: #974a4a;
   font-size: 20px;
 }
-.titleProduct{
+.titleProduct {
   font-size: 50px;
   font-weight: 700;
-  color: #BD0707;
+  color: white;
 }
-.priceBrown{
-   font-size: 30px;
-   font-weight: 700;
-   color: #974A4A;
+.priceBrown {
+  font-size: 30px;
+  font-weight: 700;
+  color: #974a4a;
 }
-.topping>p{
-  color: #BD0707;
+.topping > p {
+  color: #bd0707;
   /* font-size: 15px; */
 }
-.price>p{
+.price > p {
   font-size: 30px;
   font-weight: 700;
 }
-.btn{
-  font-size: 23px;
-  padding: 5px 0 5px 0;
-  font-weight: 700;
-  color: white;
+.btn {
+  position: absolute;
+  width: 100px;
+  height: 40px;
+  top: 17px;
+
+  background: #cd2e71;
+  border: 2px solid black;
+  border-radius: 5px;
+
+  font-family: "Avenir";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 14px;
+
+  color: #ffffff;
+  margin-left: 420px;
 }

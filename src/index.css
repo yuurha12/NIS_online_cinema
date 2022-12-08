@@ -120,6 +120,7 @@ a {
 .descrip {
   width: 1157px;
   height: 177px;
+  color: white;
 
   background: rgba(210, 210, 210, 0.25);
   border: 2px solid #d2d2d2;
@@ -404,10 +405,14 @@ h5 {
   margin-top: 80px;
 }
 
+.addProductLeft {
+  margin-bottom: 50px;
+}
+
 .addProductLeft h1 {
   color: white;
   font-weight: 600;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .addProductLeft input {
@@ -420,11 +425,11 @@ h5 {
   padding-left: 10px;
   margin-bottom: 20px;
   border-radius: 5px;
+  color: white;
 }
 
 .addProductLeft input:focus-visible {
-  outline: #bd0707;
-  background-color: #063fea1a;
+  color: white;
 }
 
 .title {
@@ -433,7 +438,7 @@ h5 {
 }
 
 .addProductLeft button {
-  width: 400px;
+  width: 230px;
   height: 40px;
   background: #cd2e71;
   border-radius: 5px;
@@ -441,7 +446,8 @@ h5 {
   border: none;
   border-radius: 5px;
   position: relative;
-  left: 65%;
+  left: 930px;
+  margin-top: 10px;
 }
 
 .addProductImage {
@@ -455,9 +461,8 @@ h5 {
   border-radius: 5px;
   justify-content: space-between;
   color: rgba(210, 210, 210, 0.25);
-  margin-bottom: 40px;
   position: relative;
-  right: 11px;
+  right: 15px;
 }
 
 .previewName {
@@ -804,3 +809,26 @@ h5 {
   left: unset;
   height: unset;
 } */
+
+/* youtube player */
+.yt {
+position: relative;
+top: -100px;
+width: 600px !important;
+height: 300px !important;
+}
+
+/* film image */
+.imgfilm {
+  position: relative;
+  width: 349px;
+  height: 485px;
+  left: 100px;
+  top: 156px;
+}
+
+
+/* titlefilm */
+#ck {
+  margin-bottom: unset !important;
+}

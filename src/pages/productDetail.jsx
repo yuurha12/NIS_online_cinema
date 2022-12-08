@@ -6,13 +6,14 @@ import { useMutation, useQuery } from "react-query";
 import { API } from "../config/api";
 
 // style
-import productModules from "../style/css/product.module.css"
+import productModules from "../style/css/product.module.css";
 
 // file
 import checkToping from "../assets/images/icon/green-check.svg";
 
 // component
 import NavBar from "../components/navbar/Navbar";
+import { Button, Col, Container, Row } from "react-bootstrap";
 
 export default function DetailProductPage() {
   document.title = "Waysbucks | Product";
@@ -21,61 +22,12 @@ export default function DetailProductPage() {
   // check
   const [show, setShow] = useState(false);
 
-  const handleCheck = () => {
-    if (show === false) {
-      setShow(true);
-    } else {
-      setShow(false);
-    }
-  };
-
-  // toping--
-  
-  //price topping
-  const [toping, setToping] = useState([]);
-  //id topping
-  const [topping_id, setIdToping] = useState([]);
-
-  // check mark
-  const handleChange = (e) => {
-    let updateToping = [...toping];
-    if (e.target.checked) {
-      updateToping = [...toping, e.target.value];
-    } else {
-      updateToping.splice(toping.indexOf(e.target.value));
-    }
-    setToping(updateToping);
-
-    let toppingId = [...topping_id];
-    if (e.target.checked) {
-      toppingId = [...topping_id, parseInt(e.target.id)];
-    } else {
-      toppingId.splice(topping_id.indexOf(e.target.id));
-    }
-
-    setIdToping(toppingId);
-  };
-
-  // fetching
   let { id } = useParams();
   let { data: product } = useQuery("productCache", async () => {
     const response = await API.get("/product/" + id);
     return response.data.data;
   });
 
-  let { data: toppings } = useQuery("toppingsCache", async () => {
-    const response = await API.get("/toppings");
-    return response.data.data;
-  });
-
-  // price total
-  let resultTotal = toping.reduce((a, b) => {
-    return a + parseInt(b);
-  }, 0);
-   
-
-  let subtotal = product?.price + resultTotal;
-  let qty = 1;
 
   const handleSubmit = useMutation(async (e) => {
     try {
@@ -90,17 +42,17 @@ export default function DetailProductPage() {
       await API.post("/transaction", config);
 
       const body = JSON.stringify({
-        topping_id: topping_id,
-        subtotal: subtotal,
-        product_id: parseInt(id),
-        qty: qty,
+        // topping_id: topping_id,
+        // subtotal: subtotal,
+        // product_id: parseInt(id),
+        // qty: qty,
       });
 
       await API.post("/cart", body, config);
 
-      setIdToping([]);
-      setToping([]);
-      navigate("/payment")
+      // setIdToping([]);
+      // setToping([]);
+      navigate("/payment");
     } catch (error) {
       console.log(error);
     }
@@ -109,68 +61,40 @@ export default function DetailProductPage() {
   return (
     <>
       <NavBar />
-      <div>
+      <Container>
         <section>
           <div className={productModules.wrap}>
-            <div className={productModules.left}>
-              <img src={product?.image} alt="ProductImage" />
-            </div>
-            <div className={productModules.right}>
-              <span className={productModules.name}>
+            <Row className={productModules.left}>
+              <Col>
+                <img src={product?.image} alt="ProductImage" />
+              </Col>
+            </Row>
+            <Row className="position-relative">
+              <Col className="d-flex mb-5" id="ck">
                 <p className={productModules.titleProduct}>{product?.title}</p>
-                <p className={productModules.priceBrown}>
-                  {Rupiah.convert(product?.price)}
-                </p>
-                <div className={productModules.toppings}>
-                  {toppings?.map((item, index) => (
-                    <div className={productModules.topping} key={index}>
-                      <label
-                        htmlFor={item?.id}
-                        className={productModules.checkContainer}
-                      >
-                        <input
-                          type="checkbox"
-                          id={item?.id}
-                          onChange={handleChange}
-                          value={item?.price}
-                          name="toping"
-                          className={productModules.testCheck}
-                        />
-
-                        <img
-                          src={checkToping}
-                          alt="check"
-                          className={productModules.checkmark}
-                        />
-                        <img
-                          src={item?.image}
-                          alt="ToppingImage"
-                          onClick={handleCheck}
-                          className={productModules.imageTopping}
-                        />
-                      </label>
-                      <p>{item?.title.substring(0, 17)}</p>
-                    </div>
-                  ))}
-                </div>
-              </span>
-              <div className={productModules.price}>
-                <p>Total</p>
-                <p>{Rupiah.convert(product?.price + resultTotal)}</p>
-              </div>
-              <div className={productModules.btn_grp}>
-                <button
-                  className={productModules.btn}
-                  onClick={(e) => handleSubmit.mutate(e)}
-                >
-                  {" "}
-                  Add Cart
-                </button>
-              </div>
-            </div>
+                  <Button
+                    className={productModules.btn}
+                    onClick={(e) => handleSubmit.mutate(e)}
+                  >
+                    {" "}
+                    Buy Now
+                  </Button>
+              </Col>
+              <iframe
+                className="yt"
+                width="560"
+                height="315"
+                src={product?.linkfilm}
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+              
+            </Row>
           </div>
         </section>
-      </div>
+      </Container>
     </>
   );
 }
