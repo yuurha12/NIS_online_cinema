@@ -1,13 +1,16 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AppContexts } from "../contexts/AppContexts";
 import { NavDropdown, Nav } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PhotoProfile from "../../assets/images/blank-profile.png";
-import Cart from "../../assets/images/icon/shopping-basket.svg";
-import userAvatar from "../../assets/images/icon/user.svg";
+// import Cart from "../../assets/images/icon/shopping-basket.svg";
+
+//icon dropwdown user
+import userIcon from "../../assets/images/icon/user2.svg";
+import logoutIcon from "../../assets/images/icon/logout1.svg"
+import myListIcon from "../../assets/images/icon/clapperboard1.svg"
 import { API } from "../../config/api";
 export default function ModalAuth() {
-  const [bubble, setBubble] = useState([]);
 
   const [photo, setPhoto] = useState({});
 
@@ -21,13 +24,13 @@ export default function ModalAuth() {
 
 
 
-  useEffect(() => {
-    API.get("/carts-id")
-      .then((res) => {
-        setBubble(res.data.data);
-      })
-      .catch((err) => console.log("error", err));
-  }, []);
+  // useEffect(() => {
+  //   API.get("/carts-id")
+  //     .then((res) => {
+  //       setBubble(res.data.data);
+  //     })
+  //     .catch((err) => console.log("error", err));
+  // }, []);
   // const userAva = <Image src={userIcon} alt="" roundedCircle />;
 
   const [state, dispatch] = useContext(AppContexts);
@@ -45,33 +48,19 @@ export default function ModalAuth() {
     navigate("/profile");
   };
 
+  const myListFilm = () => {
+    navigate("/mylistfilm")
+  }
+
   return (
     <>
       <Nav className="d-flex mx-4">
-        <Link to={state.user.role === "admin" ? "/" : "/payment"}>
-          <img
-            src={Cart}
-            alt="cart"
-            className="navbarCart"
-          />
-        </Link>
-        <nav
-          className={
-            bubble === undefined
-              ? "d-none"
-              : bubble?.length === 0
-              ? "d-none"
-              : "circle"
-          }
-        >
-          {bubble?.length}
-        </nav>
       </Nav>
       <NavDropdown
         title={
           <img className="pp"
             src={
-              photo?.image === "http://localhost:5000/uploads/"
+              photo?.image === "https://res.cloudinary.com/dfebjhjpu/image/upload/v1670185375/waysbucks/"
                 ? PhotoProfile
                 : photo?.image
             }
@@ -82,12 +71,16 @@ export default function ModalAuth() {
         id="basic-nav-dropdown"
       >
         <NavDropdown.Item onClick={profile}>
-          <img src={userAvatar} alt="" />
+          <img src={userIcon} alt="" />
           Profile
+        </NavDropdown.Item>
+        <NavDropdown.Item onClick={myListFilm}>
+          <img src={myListIcon} alt="mylistIcon" />
+          My Film List
         </NavDropdown.Item>
         <NavDropdown.Divider />
         <NavDropdown.Item onClick={logout}>
-          <img src={userAvatar} alt="" />
+          <img src={logoutIcon} alt="" />
           Logout
         </NavDropdown.Item>
       </NavDropdown>

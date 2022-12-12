@@ -3,16 +3,17 @@ import { Modal } from "react-bootstrap";
 import { useMutation } from "react-query";
 import { API } from "../../config/api";
 import paperClip from "../../assets/images/icon/paperclip.svg";
+import { useParams } from "react-router-dom";
 
 export default function ProfileModal({ refetch }) {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
-
+  
+  // let { id } = useParams();
+  let { id } = useParams();
   const [form, setForm] = useState({
     phone: "",
-    postalcode: "",
-    address: "",
     image: "",
   });
 
@@ -24,9 +25,9 @@ export default function ProfileModal({ refetch }) {
         e.target.type === "file" ? e.target.file : e.target.value,
     });
 
-    if (e.target.type === "file") {
-      setPreviewName(e.target.files[0].name);
-    }
+    // if (e.target.type === "file") {
+    //   setPreviewName(e.target.files[0].name);
+    // }
   };
 
   const handleSubmit = useMutation(async (e) => {
@@ -35,17 +36,17 @@ export default function ProfileModal({ refetch }) {
 
       const config = {
         headers: {
-          "Content-type": "application/json",
+          "Content-type": "multipart/form-data",
         },
       };
 
       const formData = new FormData();
       formData.set("phone", form.phone)
-      formData.set("postalcode", form.postalcode)
-      formData.set("address", form.address)
       formData.set("image", form.image[0], form.image[0].name);
+      
 
-      await API.patch("/profile", formData, config);
+      await API.patch("/profile" +id, formData, config);
+      console.log(handleSubmit);
 
       setShow(false);
       refetch();
@@ -71,22 +72,6 @@ export default function ProfileModal({ refetch }) {
               id="phone"
               onChange={handleOnChange}
             />
-              <input
-                type="number"
-                className="inputAuth p-2"
-                placeholder="Postal Code"
-                name="postalcode"
-                id="postalcode"
-                onChange={handleOnChange}
-              />
-            <input
-              type="text"
-              className="inputAuth p-2"
-              placeholder="Address"
-              name="address"
-              id="address"
-              onChange={handleOnChange}
-            />
             <input
               type="file"
               name="image"
@@ -104,7 +89,7 @@ export default function ProfileModal({ refetch }) {
               <img src={paperClip} alt="paperClip" className="paperClip"/>
             </label>
 
-            <button className="btnAuth mb-4">Submit</button>
+            <button type="submit" className="btnAuth mb-4" onClick={handleClose}>Submit</button>
           </div>
         </form>
       </Modal>

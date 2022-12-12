@@ -8,17 +8,18 @@ import { API, setAuthToken } from "./config/api";
 
 //page
 import Home from "./pages/Home";
-import ProdDetail from "./pages/productDetail";
+import ProdDetail from "./pages/filmDetail";
 import Profile from "./pages/profile";
 import Income from "./pages/incometransaction";
-import CartDigan from "./pages/cartPage";
-import AddProduct from "./pages/AddProduct";
-import AddToping from "./pages/AddTopping";
+import AddProduct from "./pages/AddFilm";
 
 //context
 import { AppContexts } from "./components/contexts/AppContexts";
+import MylistFilm from "./pages/mylistfilm";
 
-
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 function App() {
   // Init user context
@@ -34,7 +35,7 @@ function App() {
       // navigate("/")
     } else {
       if (state.user.role === "admin") {
-        navigate("/income-transaction");
+        // navigate("/income-transaction");
       } else if (state.user.role === "user") {
         // navigate("/")
       }
@@ -72,12 +73,11 @@ function App() {
   return (
     <Routes>
       <Route exact path="/" element={<Home />} />
-      <Route exact path="/product-detail/:id" element={<ProdDetail />} />
+      <Route exact path="/film-detail/:id" element={<ProdDetail />} />
       <Route exact path="/profile" element={<Profile />} />
       <Route exact path="/income-transaction" element={<Income />} />
-      <Route exact path="/payment" element={<CartDigan />} />
-      <Route exact path="/add-product" element={<AddProduct />} />
-      <Route exact path="/add-topping" element={<AddToping />} />
+      <Route exact path="/add-film" element={<AddProduct />} />
+      <Route exact path="/mylistfilm" element={<MylistFilm />} />
     </Routes>
   );
 }

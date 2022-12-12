@@ -9,6 +9,7 @@ import PhotoProfile from "../assets/images/blank-profile.png";
 import ProfileModal from "../components/modal/profile";
 import NavBar from "../components/navbar/Navbar";
 import Logo from "../assets/images/icon/Group.png"
+import { useParams } from "react-router-dom";
 
 export default function Profile() {
   const title = "Profile";
@@ -16,18 +17,20 @@ export default function Profile() {
 
   const [state] = useContext(AppContexts);
 
-  let { data: ProfileTransactions } = useQuery(
-    "transactionChacesss",
-    async () => {
-      const response = await API.get("/user-transaction");
-      return response.data.data;
-    }
-  );
-
-  let { data: Profile, refetch } = useQuery("profileChaces", async () => {
+  // let { id } = useParams();
+  let { data: Profile, refetch } = useQuery("profileChacess", async () => {
     const response = await API.get("/user-profile");
     return response.data.data.profile;
   });
+
+  let { id } = useParams();
+  let { data: transaction } = useQuery(
+    "transactionChacessssss",
+    async () => {
+      const response = await API.get("/transaction/user/" + id);
+      return response.data.data;
+    }
+  );
 
   return (
     <>
@@ -39,7 +42,7 @@ export default function Profile() {
           <div className="biodata">
             <img
               src={
-                Profile?.image === "http://localhost:5000/uploads/"
+                Profile?.image === "https://res.cloudinary.com/dfebjhjpu/image/upload/v1670185375/waysbucks/"
                   ? PhotoProfile
                   : Profile?.image
               }
@@ -51,34 +54,30 @@ export default function Profile() {
               <li className="biodataTitle">Email</li>
               <li className="biodataContent">{state.user.email}</li>
               <li className="biodataTitle">Phone</li>
-              <li className="biodataContent">{state.profile?.phone}</li>
-              <li className="biodataTitle">Postal Code</li>
-              <li className="biodataContent">{state.profile?.postalcode}</li>
-              <li className="biodataTitle">Address</li>
-              <li className="biodataContent">{state.profile?.adrress}</li>
+              {/* <li className="biodataContent">{state.user.phone}</li> */}
             </ul>
           </div>
         </div>
 
         <div className="profileRight">
           <h1>MY TRANSACTIONS</h1>
-          {ProfileTransactions?.map((item, index) => (
+          {transaction?.map((item, index) => (
             <div
               className={item?.status === "" ? "fd" : "profileCard mb-5"}
               key={index}
             >
               <div className="contentCardLeft">
-                {item?.carts?.map((cart, idx) => (
+                {item?.map((idx) => (
                   <div className="mapContent" key={idx}>
                     <img
                       src={
-                        "http://localhost:5000/uploads/" + cart?.product?.image
+                        "http://localhost:5000/uploads/" + item?.image
                       }
                       alt="coffee"
                     />
                     <ul>
                       <li className="profileCardTitle">
-                        {cart?.product?.title}
+                        {item?.title}
                       </li>
                       <li className="profileCardDate">
                         <strong>Saturday</strong>,20 Oktober 2022
@@ -86,13 +85,13 @@ export default function Profile() {
                       <li className="profileCardToping">
                         <strong className="inline">
                        
-                          {cart.topping.map((topping, idx) => (
+                          {transaction.map((topping, idx) => (
                             <span key={idx}>{topping?.title},</span>
                           ))}
                         </strong>
                       </li>
                       <li className="profileCardPrice">
-                        Price: {Rupiah.convert(cart?.product?.price)}
+                        Price: {Rupiah.convert(item?.price)}
                       </li>
                     </ul>
                   </div>
@@ -116,7 +115,7 @@ export default function Profile() {
                   <p>{item?.status}</p>
                 </span>
                 <p className="profileSubTotal">
-                  Sub Total : {Rupiah.convert(item?.total)}
+                  Sub Total : {Rupiah.convert(item?.price)}
                 </p>
               </div>
             </div>

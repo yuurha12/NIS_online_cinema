@@ -37,11 +37,10 @@ function Income() {
             <thead>
               <tr>
                 <th>No</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Post Code</th>
-                <th>Income</th>
-                <th>Status</th>
+                <th>Users</th>
+                <th>Film</th>
+                <th>Number Account</th>
+                <th>Status Payment</th>
               </tr>
             </thead>
             <tbody>

@@ -22,16 +22,6 @@ const NavBar = ({ show, setShow }) => {
   const [state] = useContext(AppContexts);
   const isLogin = state.isLogin;
 
-  const [bubble, setBubble] = useState([])
-
-  useEffect(() => {
-    API.get("cart-id").then((res) => {
-      setBubble(res.dat.data);
-    })
-    .catch((err)=> console.log("error", err));
-  },[bubble]);
-
-  
 
   let redirect = null
   if (state.user.role === "admin") {

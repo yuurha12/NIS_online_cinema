@@ -3,7 +3,7 @@ import { Nav, Image, Stack, Button, Overlay, Popover } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import ProfileAdmin from "../../assets/images/mod.jpg";
 import AddTopingImg from "../../assets/images/icon/topping.svg";
-import AddProductImg from "../../assets/images/icon/product.svg";
+import AddFilmImg from "../../assets/images/icon/addfilm.svg";
 import LogoutIcon from "../../assets/images/icon/logout.svg";
 import { AppContexts } from "../contexts/AppContexts";
 
@@ -69,44 +69,23 @@ function NavBarAdmin() {
                   {/* button add product start */}
                   <Button
                     onClick={() => {
-                      navigate("/add-product");
+                      navigate("/add-film");
                     }}
                     className="d-flex flex-column justify-content-center bg-white border-0 mb-3"
                   >
                     <div className="d-flex flex-row justify-content-center">
                       <div className="d-flex flex-column justify-content-center">
-                        <Image src={AddProductImg} style={{ width: "50%" }} />
+                        <Image src={AddFilmImg} style={{ width: "100%" }} />
                       </div>
                       <p
-                        className="justify-content-center m-0 fw-bold"
+                        className="justify-content-end m-0"
                         style={{ color: "#bd0707" }}
                       >
-                        Add Product
+                        Add Film
                       </p>
                     </div>
                   </Button>
                   {/* button add product end */}
-
-                  {/* button add toping start */}
-                  <Button
-                    onClick={() => {
-                      navigate("/add-topping");
-                    }}
-                    className="d-flex flex-column justify-content-center bg-white border-0"
-                  >
-                    <div className="d-flex flex-row justify-content-center">
-                      <div className="d-flex flex-column justify-content-center">
-                        <Image src={AddTopingImg} style={{ width: "50%" }} />
-                      </div>
-                      <p
-                        className="d-flex flex-column justify-content-center m-0 fw-bold"
-                        style={{ color: "#bd0707" }}
-                      >
-                        Add Toping
-                      </p>
-                    </div>
-                  </Button>
-                  {/* button add toping end */}
                 </Popover.Body>
                 <hr className="m-0 p-0" />
                 <Popover.Body>
@@ -117,10 +96,10 @@ function NavBarAdmin() {
                   >
                     <div className="d-flex flex-row justify-content-center">
                       <div className="d-flex flex-column justify-content-center">
-                        <Image src={LogoutIcon} style={{ width: "50%" }} />
+                        <Image src={LogoutIcon} style={{ width: "100%" }} />
                       </div>
                       <p
-                        className="d-flex flex-column justify-content-center m-0 fw-bold"
+                        className="d-flex flex-column justify-content-center m-0"
                         style={{ color: "#bd0707" }}
                       >
                         Logout
