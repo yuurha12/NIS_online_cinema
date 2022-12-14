@@ -15,7 +15,7 @@ const Details = () => {
       theme: "dark",
     });
 
-  // ambil id dari params dulu cuy
+  // take id from params
   const { id } = useParams();
   const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
@@ -174,7 +174,7 @@ const Details = () => {
                 ></iframe>
               )}
             </div>
-            <h5 className="text-light">{films?.category?.name}</h5>
+            <h5 className="text-light">{films?.categorie?.name}</h5>
             <h5 className="text-color">
               {convertRupiah.convert(films?.price)}
             </h5>

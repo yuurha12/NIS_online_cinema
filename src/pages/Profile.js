@@ -48,7 +48,7 @@ const Profile = () => {
 
         <Col className="col-12 col-md-6">
           <h2 className="mb-5 text-light">History Transaction</h2>
-          <div style={{ maxHeight: "250px", overflow: "scroll" }}>
+          <div style={{ maxHeight: "520px", overflow: "scroll" }}>
             {user?.transaction?.map((item) => (
               <Card className="shadow d-flex mb-3 btn-color border border-md card-light">
                 <Card.Body>
