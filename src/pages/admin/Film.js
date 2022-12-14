@@ -73,7 +73,7 @@ const Film = () => {
                 >
                   Update
                 </Button>
-                <Button
+                {/* <Button
                   onClick={async () => {
                     const response = await API.delete(
                       `/film/delete/${item.id}`
@@ -84,7 +84,7 @@ const Film = () => {
                   className="fw-bold"
                 >
                   Delete
-                </Button>
+                </Button> */}
               </td>
             </tr>
           ))}
