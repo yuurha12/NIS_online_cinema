@@ -1,94 +1,127 @@
-import { Button, Form, Modal, Alert } from 'react-bootstrap';
-import React, { useState } from 'react';
-import { useMutation } from 'react-query';
-import {API} from '../../config/api'
+import React, { useState } from "react";
+import { Alert, Button, Form, Modal } from "react-bootstrap";
+import { useMutation } from "react-query";
 
-//register route
+import { API } from "../../config/api";
 
-const Regform = ({show, hide,setModalLoginShow, setModalRegisterShow}) => {
+const Register = ({ show, setShow, setShowLogin }) => {
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const [message, setMessage] = useState(null);
 
   const [form, setForm] = useState({
-    name: '',
-    email: '',
-    password: '',
+    email: "",
+    fullname: "",
+    password: "",
+    phone: "",
   });
 
-  const handleOnChange = (e) => {
+  // console.log(form)
+  const { email, fullname, password, phone } = form;
+
+  const handleChange = (e) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     });
   };
 
-
-  const handleOnSubmit = useMutation(async (e) => {
+  const handleSubmit = useMutation(async (e) => {
     try {
-      e.preventDefault()
+      e.preventDefault();
+      const response = await API.post("/register", form);
 
-      const response = await API.post('/register', form)
+      setTimeout(() => {
+        setShow(false);
+        setShowLogin(true);
+      }, 2000);
 
-      const alert = (<Alert variant='success' className='py-1'>
-        REGISETER SUCCESS
-      </Alert>)
-      setMessage(alert)
-      console.log("register berhasil", response.data.data)
-    } catch (err) {
-      const alert = (<Alert variant='danger' className='py-1'>
-        REGISETER FAILED
-      </Alert>)
-      setMessage(alert)
-      console.log(err)
+      const alert = <Alert variant="success">Resgister Success</Alert>;
+
+      setMessage(alert);
+    } catch (error) {
+      console.log(error);
+      const alert = <Alert variant="danger">{e.response.data.message}</Alert>;
+
+      setMessage(alert);
     }
-    setModalRegisterShow(false)
-    setModalLoginShow(true)
-  })
-      
+  });
 
   return (
     <>
-      <Modal show={show} onHide={hide}>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Body>
-<div className='form-group'>
-{message && message}
-    <Form onSubmit={(e) => handleOnSubmit.mutate(e)}>
-        <h1>REGISTER</h1>
-      <Form.Group controlId="formBasicEmail">
-        <Form.Control 
-        onChange={handleOnChange} 
-        name="email" 
-        type="email" 
-        placeholder="Email" 
-        />
-      </Form.Group>
-      <Form.Group controlId="formBasicPassword">
-        <Form.Control 
-        onChange={handleOnChange} 
-        name="password"
-        type="password" 
-        placeholder="Password" 
-        />
-        </Form.Group>
-        <Form.Group controlId="formBasicName">
-        <Form.Control
-        onChange={handleOnChange} 
-        name="fullname"
-        type="text" 
-        placeholder="Full Name" 
-        />
-      </Form.Group>
-      <div>
+          {message && message}
+          <form onSubmit={(e) => handleSubmit.mutate(e)}>
+            <div className="text-yellow m-3">
+              <h2 className="text-color">Register</h2>
+            </div>
+            <input
+              label="Email"
+              type="email"
+              placeholder="Email"
+              value={email}
+              name="email"
+              onChange={handleChange}
+              className="p-2 w-100 rounded rounded-3 my-2 border-1 shadow-lg bg-dark text-light"
+              required
+            />
+            <input
+              label="password"
+              type="password"
+              placeholder="password"
+              value={password}
+              name="password"
+              onChange={handleChange}
+              className="p-2 w-100 rounded rounded-3 my-2 border-1 shadow-lg bg-dark text-light"
+              required
+            />
+            <input
+              label="Full Name"
+              type="text"
+              placeholder="Full Name"
+              value={fullname}
+              name="fullname"
+              onChange={handleChange}
+              className="p-2 w-100 rounded rounded-3 my-2 border-1 shadow-lg bg-dark text-light"
+              required
+            />
 
-      <Button variant="danger" type='submit'>Register</Button>
-      <p style={{fontSize: "11pt", margin: "8px 0 0", textAlign:"center"}}>Already have an account ? Click <span className='btn text-info' style={{border: "none", padding: "0"}} onClick={() => {hide(true); setModalLoginShow(true)}}>here</span></p>
-      </div>
-    </Form>
-</div>
+            <input
+              label="Phone Number"
+              type="text"
+              placeholder="Phone Number"
+              value={phone}
+              name="phone"
+              onChange={handleChange}
+              className="p-2 w-100 rounded rounded-3 my-2 border-1 shadow-lg bg-dark text-light"
+              required
+            />
+
+            <Button
+              type="submit"
+              className="btn-color w-100 mt-3 text-center fw-bold"
+            >
+              Register
+            </Button>
+          </form>
+          <p className="mt-3 text-center text-light">
+            Already have an account ? Klik{" "}
+            <span
+              className="fw-bold"
+              onClick={() => {
+                setShow(false);
+                setShowLogin(true);
+              }}
+            >
+              Here
+            </span>
+          </p>
         </Modal.Body>
       </Modal>
     </>
   );
-  }
+};
 
-  export default Regform
+export default Register;

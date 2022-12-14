@@ -1,110 +1,116 @@
+import React, { useContext, useState } from "react";
 import { Alert, Button, Form, Modal } from "react-bootstrap";
-import React, { useState, useContext } from "react";
-import { AppContexts } from "../contexts/AppContexts";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import { API } from "../../config/api";
-//register route
+import { UserContext } from "../../Usercontext/Usercontex";
+import "../../style/style.css";
 
-const LoginForm = ({ show, hide, setModalLoginShow, setModalRegisterShow }) => {
-  document.title = "Cinema Online | Home";
+const Login = ({ show, setShow, setShowRegister }) => {
+  const navigate = useNavigate();
+  const handleClose = () => setShow(false);
 
-  const [state, dispatch] = useContext(AppContexts);
+  const [message, setmessage] = useState(null);
+  const [state, dispatch] = useContext(UserContext);
 
-  const [message, setMessage] = useState(null);
-
-  const [form, setForm] = useState({
+  const [userLogin, setuserLogin] = useState({
     email: "",
     password: "",
   });
 
-  const handleOnChange = (e) => {
-    setForm({
-      ...form,
+  const handleChange = (e) => {
+    setuserLogin({
+      ...userLogin,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleOnSubmit = useMutation(async (e) => {
+  const handleSubmit = useMutation(async (e) => {
     try {
       e.preventDefault();
 
-      const response = await API.post("/login", form);
+      const data = await API.post("/login", userLogin);
 
-      const alert = (
-        <Alert variant="success" className="py-1">
-          Success
-        </Alert>
-      );
-      setMessage(alert);
+      const alert = <Alert variant="success">Login berhasil!</Alert>;
+
+      setmessage(alert);
+      setShow(false);
+
+      let payload = data.data.data;
+      // console.log("isi payload", payload.token);
       dispatch({
         type: "LOGIN_SUCCESS",
-        payload: response.data.data,
+        payload,
       });
-      console.log("LOGIN SUCCESS", response.data.data);
-    } catch (err) {
-      const alert = (
-        <Alert variant="danger" className="py-1">
-          LOGIN FAILED
-        </Alert>
-      );
-      setMessage(alert);
-      console.log(err);
+
+      setuserLogin({
+        email: "",
+        password: "",
+      });
+
+      setmessage(null);
+      data.data.data.role == 'admin' && navigate('/home-admin');
+
+    } catch (error) {
+      console.log(error);
+      const alert = <Alert variant="danger">Email / password salah!</Alert>;
+
+      setmessage(alert);
     }
-    hide(true);
   });
 
   return (
     <>
-      <Modal show={show} onHide={hide}>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Body>
-          <div className="form-group">
-            {message && message}
-            <Form onSubmit={(e) => handleOnSubmit.mutate(e)}>
-              <h1>LOGIN</h1>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Control
-                  onChange={handleOnChange}
-                  name="email"
-                  type="email"
-                  placeholder="Email"
-                />
-              </Form.Group>
-              <Form.Group controlId="formBasicPassword">
-                <Form.Control
-                  onChange={handleOnChange}
-                  name="password"
-                  type="password"
-                  placeholder="Password"
-                />
-              </Form.Group>
-              <Button variant="danger" type="submit">
-                Login
-              </Button>{" "}
-              <p
-                style={{
-                  fontSize: "11pt",
-                  margin: "8px 0 0",
-                  textAlign: "center",
-                }}
-              >
-                Already have an account ? Click{" "}
-                <span
-                  className="btn text-info"
-                  style={{ border: "none", padding: "0" }}
-                  onClick={() => {
-                    setModalRegisterShow(true);
-                    hide(true);
-                  }}
-                >
-                  here
-                </span>
-              </p>
-            </Form>
-          </div>
+          {message && message}
+          <Form>
+            <div className="m-3">
+              <h2 className="text-color">Login</h2>
+            </div>
+            <input
+              label="Email"
+              type="email"
+              placeholder="Email"
+              name="email"
+              value={userLogin.email}
+              onChange={handleChange}
+              className="p-2 w-100 rounded rounded-3 my-2 border-1 shadow-lg bg-dark text-light"
+              required
+            />
+            <input
+              label="Password"
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={userLogin.password}
+              onChange={handleChange}
+              className="p-2 w-100 rounded rounded-3 my-2 border-1 shadow-lg bg-dark text-light"
+              required
+            />
+            <Button
+              className="btn-color w-100 my-2 fw-bold px-5"
+              onClick={(e) => handleSubmit.mutate(e)}
+            >
+              Login
+            </Button>
+          </Form>
+          <p className="mt-3 text-light text-center">
+            Don't have an account ? click
+            <span
+              className="fw-bold"
+              onClick={() => {
+                setShow(false);
+                setShowRegister(true);
+              }}
+            >
+              Here
+            </span>
+          </p>
         </Modal.Body>
       </Modal>
     </>
   );
 };
 
-export default LoginForm;
+export default Login;
