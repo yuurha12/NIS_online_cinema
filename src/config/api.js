@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export const API = axios.create({
-  // baseURL: "http://34.101.33.73:5000/api/v1",
-  baseURL: "http://localhost:5000/cinema/"
+  baseURL: process.env.REACT_APP_BASEURL
+  // baseURL: "http://localhost:5000/cinema/"
 });
 
 export const setAuthToken = (token) => {
