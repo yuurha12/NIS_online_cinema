@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const API = axios.create({
-  baseURL: "https://online-cinema.up.railway.app/"
+  baseURL: "https://online-cinema.up.railway.app/cinema/"
   // baseURL: "http://localhost:5000/cinema/"
 });
 
