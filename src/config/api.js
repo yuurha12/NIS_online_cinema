@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const API = axios.create({
-  baseURL: "https://online-cinema.up.railway.app/cinema/"
+  baseURL: "https://api1.chaostic-hoki.my.id/api/v1"
   // baseURL: "http://localhost:5000/cinema/"
 });
 
